@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import { IRouteMapping, routes } from "./routes";
+import { Button } from "@material-ui/core";
+import { Home } from "@material-ui/icons";
 
-export class App extends React.Component<object> {
-  render() {
-    return (
-      <div className="App">
-          <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <p>
-                  Poop <code>src/App.tsx</code> and save to reload.
-              </p>
-              <a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-              >
-                  Learn React
-              </a>
-          </header>
-      </div>
-    );
+export default function App() {
+  return (
+    <div className="root">
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          { routes.map(MenuItem) }
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+
+}
+
+function MenuItem(mapping: IRouteMapping) {
+  return (
+    <Button className="menuItem" color="inherit">
+      { ItemContent(mapping) }
+    </Button>
+  );
+}
+
+function ItemContent(mapping: IRouteMapping) {
+  const name: string = mapping.path.substring(1);
+  if (name === '') {
+    return <Home />
   }
+  return name;
 }

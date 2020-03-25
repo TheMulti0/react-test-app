@@ -7,7 +7,8 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { App } from "./App";
+import App from "./App";
+import { IRouteMapping, routes } from "./routes";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,9 +21,11 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <App />
-        </Route>
+        {
+          routes.map((mapping, i) => (
+            <mapping.component routes={mapping.mappings} />
+          ))
+        }
       </Switch>
     </Router>
   );
