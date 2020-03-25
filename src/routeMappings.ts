@@ -1,4 +1,4 @@
-import App from "./App";
+import Home from "./Home";
 
 export interface IRouteMapping {
 
@@ -8,9 +8,9 @@ export interface IRouteMapping {
 
 }
 
-export const routes: IRouteMapping[] = [
+export const routeMappings: IRouteMapping[] = [
   {
-    path: '/',
-    component: App
+    path: '',
+    component: Home
   }
 ];

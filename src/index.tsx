@@ -7,8 +7,8 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import App from "./App";
-import { IRouteMapping, routes } from "./routes";
+import MenuBar from "./MenuBar";
+import { IRouteMapping, routeMappings } from "./routeMappings";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,16 +19,19 @@ ReactDOM.render(
 
 export default function Routes() {
   return (
-    <Router>
-      <Switch>
-        {
-          routes.map((mapping, i) => (
-            <mapping.component routes={mapping.mappings} />
-          ))
-        }
-      </Switch>
-    </Router>
+    <div>
+      <MenuBar mappings={ routeMappings } />
+      <Router>
+        <Switch>
+          { routeMappings.map(RouteMapping) }
+        </Switch>
+      </Router>
+    </div>
   );
+}
+
+function RouteMapping(mapping: IRouteMapping) {
+  return <mapping.component routes={mapping.mappings} />
 }
 
 // If you want your app to work offline and load faster, you can change

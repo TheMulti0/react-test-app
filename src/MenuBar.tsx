@@ -1,22 +1,21 @@
-import './App.css';
+import './MenuBar.css';
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { IRouteMapping, routes } from "./routes";
+import { IRouteMapping } from "./routeMappings";
 import { Button } from "@material-ui/core";
 import { Home } from "@material-ui/icons";
 
-export default function App() {
+export default function MenuBar(params: { mappings: IRouteMapping[] }) {
   return (
     <div className="root">
       <AppBar position="static">
         <Toolbar variant="dense">
-          { routes.map(MenuItem) }
+          { params.mappings.map(MenuItem) }
         </Toolbar>
       </AppBar>
     </div>
   );
-
 }
 
 function MenuItem(mapping: IRouteMapping) {
@@ -28,7 +27,7 @@ function MenuItem(mapping: IRouteMapping) {
 }
 
 function ItemContent(mapping: IRouteMapping) {
-  const name: string = mapping.path.substring(1);
+  const name: string = mapping.path;
   if (name === '') {
     return <Home />
   }
