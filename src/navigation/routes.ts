@@ -1,5 +1,5 @@
-import Home from "./Home";
-import Second from "./Second";
+import Home from "../pages/Home";
+import Second from "../pages/Second";
 
 export interface IRouteMapping {
 
@@ -15,7 +15,7 @@ export const defaultRoute: IRouteMapping =
   component: Home
 };
 
-export const routeMappings: IRouteMapping[] = [
+export const routes: IRouteMapping[] = [
   defaultRoute,
   {
     path: '/second',

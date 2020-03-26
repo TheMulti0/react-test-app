@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route
 } from "react-router-dom";
-import Navigation from "./Navigation";
-import { defaultRoute, routeMappings } from "./routeMappings";
-import ComponentRoute from "./ComponentRoute";
+import Navigation from "./navigation/Navigation";
+import { defaultRoute, routes } from "./navigation/routes";
+import ComponentRoute from "./navigation/ComponentRoute";
+import Component from "./navigation/Component";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,24 +21,20 @@ ReactDOM.render(
 
 export default function Routes() {
   return (
-    <div>
-      <Router>
-        <Navigation mappings={ routeMappings } />
-        <Switch>
+    <BrowserRouter>
 
-          { routeMappings.map(ComponentRoute) }
+      <Navigation mappings={ routes } />
 
-          <Route
-            path={defaultRoute.path}
-            render={ props =>
-              <defaultRoute.component
-                className="container"
-                {...props}
-                mappings={defaultRoute.mappings} /> } />
+      <Switch>
 
-        </Switch>
-      </Router>
-    </div>
+        { routes.map(ComponentRoute) }
+
+        { /*Default route if none is found*/ }
+        <Route render={ props => Component(defaultRoute, props) } />
+
+      </Switch>
+
+    </BrowserRouter>
   );
 }
 
