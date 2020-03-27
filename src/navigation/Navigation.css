@@ -8,6 +8,7 @@
 
 .menuItem {
   margin-right: 1rem !important;
+  text-decoration: none;
 }
 
 .itemContent {
