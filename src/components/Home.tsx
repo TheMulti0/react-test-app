@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <a>
+    <a color="primary">
       Poop
     </a>
   );

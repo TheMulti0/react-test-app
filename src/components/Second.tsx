@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Second() {
-  return <a>Second</a>
+export default function Second(props: any) {
+  return <a color="secondary">Second</a>
 }
 

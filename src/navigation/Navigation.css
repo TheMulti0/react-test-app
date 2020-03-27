@@ -2,6 +2,10 @@
   flex-grow: 1;
 }
 
+.grow {
+  flex: 1 1 auto;
+}
+
 .menuItem {
   margin-right: 1rem !important;
 }
