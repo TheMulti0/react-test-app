@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Home from "../components/Home";
 import Second from "../components/Second";
-import Navigation from "./Navigation";
+import NavigationBar from "./NavigationBar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ComponentRoute from "./ComponentRoute";
 import Component from "./Component";
@@ -59,7 +59,7 @@ export default function App() {
       <CssBaseline />
       <BrowserRouter>
 
-          <Navigation mappings={routes} oppositeThemeType={oppositeThemeType} toggleDarkMode={toggleDarkTheme} />
+          <NavigationBar mappings={routes} oppositeThemeType={oppositeThemeType} toggleDarkMode={toggleDarkTheme} />
 
           <Switch>
 

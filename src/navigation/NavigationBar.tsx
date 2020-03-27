@@ -1,4 +1,4 @@
-import './Navigation.css';
+import './NavigationBar.css';
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,19 +10,17 @@ import { Box, Theme } from "@material-ui/core";
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-export default function Navigation(
+export default function NavigationBar(
   params: { mappings: IRouteMapping[], oppositeThemeType: any, toggleDarkMode: any }) {
 
   return (
     <div className="root">
-      <AppBar position="static">
-        <Toolbar variant="regular" color="accent">
+      <AppBar position="static" color="transparent">
+        <Toolbar variant="regular">
           { params.mappings.map(MenuItem) }
           <div className="grow" />
           <Button onClick={ event => params.toggleDarkMode() }>
-            <Box className="itemContent">
-              { ThemeIcon(params.oppositeThemeType()) }
-            </Box>
+            { ThemeIcon(params.oppositeThemeType()) }
           </Button>
         </Toolbar>
       </AppBar>
@@ -51,9 +49,7 @@ function MenuItem(mapping: IRouteMapping) {
   return (
     <Link className="menuItem" to={mapping.path}>
       <Button>
-        <Box className="itemContent">
-          { GetContent(mapping.path) }
-        </Box>
+        { GetContent(mapping.path) }
       </Button>
     </Link>
   );
