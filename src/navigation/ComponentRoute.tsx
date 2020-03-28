@@ -1,9 +1,10 @@
 import React from "react";
 import { Route } from 'react-router-dom';
 import Component from "./Component";
-import { IRouteMapping } from "../models/IRouteMapping";
+import { IRouteMappingProps } from "../models/IRouteMappingProps";
 
-export default function ComponentRoute(mapping: IRouteMapping) {
+export default function ComponentRoute(props: IRouteMappingProps) {
+  const { mapping } = props;
   return (
     <Route
       exact
