@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap'
   },
   image: {
-    height: 40,
-    width: 90,
+    height: '36px',
+    width: 100,
     marginRight: '1rem !important',
     '&:hover, &$focusVisible': {
       zIndex: 1,
@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   imageButton: {
+    borderRadius: '4px',
     textDecoration: 'none',
     position: 'absolute',
     left: 0,
@@ -42,9 +43,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
+    transition: theme.transitions.create('background-color', {duration:250})
   },
   imageButtonSelected: {
+    borderRadius: '4px',
     textDecoration: 'none',
     position: 'absolute',
     left: 0,
@@ -54,7 +57,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.palette.action.selected
+    backgroundColor: theme.palette.action.selected,
+    transition: theme.transitions.create('background-color', {duration:250})
   },
   imageTitle: {
     position: 'relative',
@@ -63,17 +67,17 @@ const useStyles = makeStyles(theme => ({
   imageMarked: {
     width: '0%',
     opacity: 1,
-    transition: theme.transitions.create(['opacity', 'width'], {duration:200})
+    transition: theme.transitions.create(['opacity', 'width'], {duration:250})
   },
   imageClicked: {
-    height: 2,
+    height: '10%',
     width: '100%',
     opacity: 1,
     backgroundColor: theme.palette.text.primary,
     position: 'absolute',
     left: 0,
     bottom: -1,
-    transition: theme.transitions.create(['opacity', 'width'], {duration:200})
+    transition: theme.transitions.create(['opacity', 'width'], {duration:250})
   }
 }));
 
