@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Home from "../components/Home";
 import Second from "../components/Second";
 import NavigationBar from "./NavigationBar";
@@ -35,42 +35,61 @@ const defaultTheme: ThemeOptions = {
   }
 };
 
-export default function App() {
-  const [theme, setTheme]: [ThemeOptions, React.Dispatch<React.SetStateAction<ThemeOptions>>] = useState(defaultTheme);
+interface State {
+  theme: ThemeOptions;
+}
 
-  function oppositeThemeType(): "light" | "dark" {
-    return theme.palette?.type === "light" ? "dark" : "light";
+export default class App extends React.Component<any, State> {
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      theme: defaultTheme
+    };
   }
 
-  function toggleDarkTheme() {
-    setTheme(prevState => {
-
-      let theme = Object.create(defaultTheme);
-      (theme.palette as PaletteOptions).type = oppositeThemeType();
-
-      return theme;
-    })
+  oppositeThemeType(): "light" | "dark" {
+    return this.state.theme.palette?.type === "light" ? "dark" : "light";
   }
 
-  const muiTheme = createMuiTheme(theme);
+  getToggledTheme(): ThemeOptions {
+    const theme: ThemeOptions = Object.create(defaultTheme);
 
-  return (
-    <MuiThemeProvider theme={muiTheme}>
-      <CssBaseline />
-      <BrowserRouter>
+    (theme.palette as PaletteOptions).type = this.oppositeThemeType();
 
-          <NavigationBar mappings={routes} oppositeThemeType={oppositeThemeType} toggleDarkMode={toggleDarkTheme} />
+    return theme;
+  }
+
+  toggleTheme() {
+    this.setState({
+      theme: this.getToggledTheme()
+    });
+  }
+
+  render() {
+
+
+    const muiTheme = createMuiTheme(this.state.theme);
+
+    return (
+      <MuiThemeProvider theme={muiTheme}>
+        <CssBaseline/>
+        <BrowserRouter>
+
+          <NavigationBar mappings={routes} oppositeThemeType={this.oppositeThemeType.bind(this)} toggleDarkMode={this.toggleTheme.bind(this)} />
 
           <Switch>
 
-            { routes.map(ComponentRoute) }
+            {routes.map(ComponentRoute)}
 
             { /*Default route if none is found*/}
-            <Route render={ props => Component(defaultRoute, props) } />
+            <Route render={props => Component(defaultRoute, props)}/>
 
           </Switch>
 
-      </BrowserRouter>
-    </MuiThemeProvider>
-  );
+        </BrowserRouter>
+      </MuiThemeProvider>
+    );
+  }
+
 }
