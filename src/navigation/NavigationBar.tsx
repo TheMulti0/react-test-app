@@ -20,29 +20,17 @@ export default function NavigationBar(
           { params.mappings.map(MenuItem) }
           <div className="grow" />
           <Button onClick={ event => params.toggleDarkMode() }>
-            { ThemeIcon(params.oppositeThemeType()) }
+            {
+              params.oppositeThemeType() === "light"
+                ? <BrightnessHighIcon />
+                : <Brightness4Icon />
+            }
           </Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 
-}
-
-function ThemeIcon(modeToPresent: "light" | "dark") {
-  if (modeToPresent === "light") {
-    return <BrightnessHighIcon />
-  }
-  return <Brightness4Icon />
-}
-
-function ToggleTheme(theme: Theme) {
-  if (theme.palette.type === "light") {
-    theme.palette.type = "dark";
-  }
-  else {
-    theme.palette.type = "light";
-  }
 }
 
 function MenuItem(mapping: IRouteMapping) {
