@@ -2,13 +2,13 @@ import './NavigationBar.css';
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IRouteMapping } from "../models/IRouteMapping";
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import MenuItem from "./MenuItem";
 import { Observable, Subject } from "rxjs";
-import { Button, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { Home } from "@material-ui/icons";
 
 interface Props {
@@ -37,7 +37,7 @@ export default function NavigationBar(props: Props) {
         <Toolbar variant="regular">
 
           <Link to='/' onClick={event => onClick(mappings[0])}>
-            <Home />
+            <Home color="primary" />
           </Link>
 
           <div className="grow" />
