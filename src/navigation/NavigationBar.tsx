@@ -34,20 +34,18 @@ export default function NavigationBar(
 }
 
 function MenuItem(mapping: IRouteMapping) {
+  const path = mapping.path;
+  const name = path.replace('/', '');
+
   return (
-    <Link className="menuItem" to={mapping.path}>
+    <Link className="menuItem" to={path}>
       <Button>
-        { GetContent(mapping.path) }
+        {
+          name === ''
+            ? <Home />
+            : name
+        }
       </Button>
     </Link>
   );
-}
-
-function GetContent(path: string) {
-  path = path.replace('/', '');
-
-  if (path === '') {
-    return <Home />
-  }
-  return path;
 }
