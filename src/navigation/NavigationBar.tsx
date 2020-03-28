@@ -18,8 +18,15 @@ export default function NavigationBar(
     <div className="root">
       <AppBar position="static" color="transparent">
         <Toolbar variant="regular">
-          { params.mappings.map(MenuItem) }
+
+          {
+            params.mappings
+              .map(
+                mapping => <MenuItem mapping={mapping} />)
+          }
+
           <div className="grow" />
+
           <Button onClick={ event => params.toggleDarkMode() }>
             {
               params.oppositeThemeType() === "light"
@@ -27,6 +34,7 @@ export default function NavigationBar(
                 : <Brightness4Icon />
             }
           </Button>
+
         </Toolbar>
       </AppBar>
     </div>

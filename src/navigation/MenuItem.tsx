@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import { Home } from "@material-ui/icons";
 import React from "react";
 
-export default function MenuItem(mapping: IRouteMapping) {
-  const path = mapping.path;
+export default function MenuItem(props: {mapping: IRouteMapping}) {
+  const path = props.mapping.path;
   const name = path.replace('/', '');
 
   return (
