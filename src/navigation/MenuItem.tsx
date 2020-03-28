@@ -1,11 +1,11 @@
 import "./MenuItem.css";
-import { IRouteMapping } from "../models/IRouteMapping";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { Home } from "@material-ui/icons";
 import React from "react";
+import { IRouteMappingProps } from "../models/IRouteMappingProps";
 
-export default function MenuItem(props: {mapping: IRouteMapping}) {
+export default function MenuItem(props: IRouteMappingProps) {
   const path = props.mapping.path;
   const name = path.replace('/', '');
 
