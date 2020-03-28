@@ -1,14 +1,15 @@
 import './Component.css';
 import React from "react";
-import { IRouteMapping } from "../models/IRouteMapping";
+import { IRouteMappingProps } from "../models/IRouteMappingProps";
 
-export default function Component(mapping: IRouteMapping, props: any) {
+export default function Component(props: IRouteMappingProps) {
+  const { mapping } = props;
   return (
     <div className="container">
 
       <mapping.component
-        {...props}
-        mappings={mapping.mappings} />
+        mappings={mapping.mappings}
+        {...props} />
 
     </div>
   );

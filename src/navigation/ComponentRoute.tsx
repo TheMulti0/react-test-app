@@ -8,7 +8,7 @@ export default function ComponentRoute(mapping: IRouteMapping) {
     <Route
       exact
       path={ mapping.path }
-      render={ props => Component(mapping, props) } />
+      render={ renderProps => <Component mapping={mapping} {...renderProps} /> } />
   );
 }
 

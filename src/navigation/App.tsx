@@ -66,7 +66,7 @@ export default class App extends React.Component<any, State> {
             }
 
             { /*Default route if none is found*/}
-            <Route render={props => Component(this.defaultRoute, props)}/>
+            <Route render={props => <Component mapping={this.defaultRoute} {...props} />} />
 
           </Switch>
 
