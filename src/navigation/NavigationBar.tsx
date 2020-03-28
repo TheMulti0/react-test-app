@@ -9,6 +9,7 @@ import { IRouteMapping } from "../models/IRouteMapping";
 import { Box, Theme } from "@material-ui/core";
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import MenuItem from "./MenuItem";
 
 export default function NavigationBar(
   params: { mappings: IRouteMapping[], oppositeThemeType: any, toggleDarkMode: any }) {
@@ -33,19 +34,3 @@ export default function NavigationBar(
 
 }
 
-function MenuItem(mapping: IRouteMapping) {
-  const path = mapping.path;
-  const name = path.replace('/', '');
-
-  return (
-    <Link className="menuItem" to={path}>
-      <Button>
-        {
-          name === ''
-            ? <Home />
-            : name
-        }
-      </Button>
-    </Link>
-  );
-}
