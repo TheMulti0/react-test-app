@@ -9,6 +9,7 @@ import { IRouteMapping } from "../models/IRouteMapping";
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import MenuItem from "./MenuItem";
+import { Observable, Subject } from "rxjs";
 
 interface Props {
   mappings: IRouteMapping[];
@@ -18,6 +19,9 @@ interface Props {
 
 export default function NavigationBar(params: Props) {
 
+  let subjects: Map<IRouteMapping, Subject<any>> = new Map(
+    params.mappings.map(value => [value, new Subject<any>()] as [IRouteMapping, Subject<any>]));
+
   return (
     <div className="root">
       <AppBar position="static" color="transparent">
@@ -26,7 +30,20 @@ export default function NavigationBar(params: Props) {
           {
             params.mappings
               .map(
-                mapping => <MenuItem mapping={mapping} />)
+                mapping => {
+                  return (
+                    <div onClick={event => {
+                      let original = subjects.get(mapping) as Subject<any>;
+                      subjects.delete(mapping);
+                      subjects.forEach(value => value.next(null));
+                      subjects.set(mapping, original)
+                    }}>
+                      <MenuItem mapping={mapping}
+                                otherItemSelected={subjects.get(mapping) as Observable<any>} />
+                    </div>
+
+                   );
+                })
           }
 
           <div className="grow" />
@@ -45,4 +62,3 @@ export default function NavigationBar(params: Props) {
   );
 
 }
-
