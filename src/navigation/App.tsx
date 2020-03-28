@@ -17,6 +17,7 @@ export default class App extends React.Component<any, State> {
 
   defaultRoute: IRouteMapping =
   {
+    name: '<Home />',
     path: '/',
     component: Home
   };
@@ -25,6 +26,7 @@ export default class App extends React.Component<any, State> {
   [
     this.defaultRoute,
     {
+      name: 'Second',
       path: '/second',
       component: Second
     }

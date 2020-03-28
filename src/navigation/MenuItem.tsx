@@ -65,8 +65,14 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.primary
   },
   imageMarked: {
+    height: '10%',
     width: '0%',
     opacity: 1,
+    backgroundColor: theme.palette.text.primary,
+    position: 'absolute',
+    left: 0,
+    bottom: -1,
+    borderRadius: '4px',
     transition: theme.transitions.create(['opacity', 'width'], {duration:250})
   },
   imageClicked: {
@@ -77,6 +83,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     left: 0,
     bottom: -1,
+    borderRadius: '4px',
     transition: theme.transitions.create(['opacity', 'width'], {duration:250})
   }
 }));
@@ -84,9 +91,7 @@ const useStyles = makeStyles(theme => ({
 export default function MenuItem(props: Props) {
   const classes = useStyles();
 
-  const path = props.mapping.path;
-  const name = path.replace('/', '');
-
+  const { mapping, otherItemSelected } = props;
 
   const [isSelected, setIsSelected] = React.useState(() => false);
   props.otherItemSelected.subscribe(value => setIsSelected(false));
@@ -98,20 +103,17 @@ export default function MenuItem(props: Props) {
         className={classes.image}
         onClick={event => setIsSelected(true)}>
         <Link className={isSelected ? classes.imageButtonSelected : classes.imageButton}
-              to={path}>
+              to={mapping.path}>
           <Typography
             component="span"
             variant="subtitle1"
             color="inherit"
-            className={classes.imageTitle}
-          >
-            {
-              name === ''
-                ? <Home />
-                : name
-            }
+            className={classes.imageTitle}>
+
+            { mapping.name }
 
             <span className={isSelected ? classes.imageClicked : classes.imageMarked}/>
+
           </Typography>
         </Link>
       </ButtonBase>
