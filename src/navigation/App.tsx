@@ -8,6 +8,7 @@ import Component from "./Component";
 import { IRouteMapping } from "../models/IRouteMapping";
 import { createMuiTheme, CssBaseline, MuiThemeProvider, Theme, ThemeOptions } from "@material-ui/core";
 import { PaletteOptions } from "@material-ui/core/styles/createPalette";
+import Third from "../components/Third";
 
 interface State {
   themeOptions: ThemeOptions;
@@ -17,18 +18,22 @@ export default class App extends React.Component<any, State> {
 
   defaultRoute: IRouteMapping =
   {
-    name: '<Home />',
+    name: 'Home',
     path: '/',
     component: Home
   };
 
   routes: IRouteMapping[] =
   [
-    this.defaultRoute,
     {
       name: 'Second',
       path: '/second',
       component: Second
+    },
+    {
+      name: 'Third',
+      path: '/third',
+      component: Third
     }
   ];
 
@@ -62,16 +67,16 @@ export default class App extends React.Component<any, State> {
                          toggleDarkMode={this.toggleThemeOptions.bind(this)} />
 
           <Switch>
-
             <div>
               {
                 this.routes.map(mapping => <ComponentRoute mapping={mapping} />)
               }
+              { /*Default route if none is found*/}
+              <Route
+                exact
+                path={this.defaultRoute.path}
+                render={renderProps => <Component mapping={this.defaultRoute} {...renderProps} /> } />
             </div>
-
-            { /*Default route if none is found*/}
-            <Route render={props => <Component mapping={this.defaultRoute} {...props} />} />
-
           </Switch>
 
         </BrowserRouter>
