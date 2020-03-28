@@ -9,48 +9,45 @@ import { IRouteMapping } from "../models/IRouteMapping";
 import { createMuiTheme, CssBaseline, MuiThemeProvider, Theme, ThemeOptions } from "@material-ui/core";
 import { PaletteOptions } from "@material-ui/core/styles/createPalette";
 
-const defaultRoute: IRouteMapping =
-{
-  path: '/',
-  component: Home
-};
-
-const routes: IRouteMapping[] =
-[
-  defaultRoute,
-  {
-    path: '/second',
-    component: Second
-  }
-];
-
-
-
-const defaultThemeOptions: ThemeOptions = {
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#0f9dfc"
-    }
-  }
-};
-
 interface State {
   themeOptions: ThemeOptions;
 }
 
 export default class App extends React.Component<any, State> {
 
+  defaultRoute: IRouteMapping =
+  {
+    path: '/',
+    component: Home
+  };
+
+  routes: IRouteMapping[] =
+  [
+    this.defaultRoute,
+    {
+      path: '/second',
+      component: Second
+    }
+  ];
+
   constructor(props: any) {
     super(props);
+
+    const themeOptions: ThemeOptions = {
+      palette: {
+        type: "dark",
+        primary: {
+          main: "#0f9dfc"
+        }
+      }
+    };
+
     this.state = {
-      themeOptions: defaultThemeOptions
+      themeOptions: themeOptions
     };
   }
 
   render() {
-
-
     const theme: Theme = createMuiTheme(this.state.themeOptions);
 
     return (
@@ -58,16 +55,16 @@ export default class App extends React.Component<any, State> {
         <CssBaseline/>
         <BrowserRouter>
 
-          <NavigationBar mappings={routes}
+          <NavigationBar mappings={this.routes}
                          oppositeThemeType={this.oppositeThemeType.bind(this)}
                          toggleDarkMode={this.toggleThemeOptions.bind(this)} />
 
           <Switch>
 
-            {routes.map(ComponentRoute)}
+            {this.routes.map(ComponentRoute)}
 
             { /*Default route if none is found*/}
-            <Route render={props => Component(defaultRoute, props)}/>
+            <Route render={props => Component(this.defaultRoute, props)}/>
 
           </Switch>
 
@@ -81,7 +78,7 @@ export default class App extends React.Component<any, State> {
   }
 
   getToggledThemeOptions(): ThemeOptions {
-    const themeOptions: ThemeOptions = Object.create(defaultThemeOptions);
+    const themeOptions: ThemeOptions = Object.create(this.state.themeOptions);
 
     (themeOptions.palette as PaletteOptions).type = this.oppositeThemeType();
 
