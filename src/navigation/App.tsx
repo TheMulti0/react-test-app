@@ -68,14 +68,14 @@ export default class App extends React.Component<any, State> {
 
           <Switch>
             <div>
-              {
-                this.routes.map(mapping => <ComponentRoute mapping={mapping} />)
-              }
-              { /*Default route if none is found*/}
               <Route
                 exact
                 path={this.defaultRoute.path}
                 render={renderProps => <Component mapping={this.defaultRoute} {...renderProps} /> } />
+
+              {
+                this.routes.map(mapping => <ComponentRoute mapping={mapping} />)
+              }
             </div>
           </Switch>
 
