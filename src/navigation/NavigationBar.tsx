@@ -6,7 +6,6 @@ import { Home } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { IRouteMapping } from "../models/IRouteMapping";
-import { Box, Theme } from "@material-ui/core";
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import MenuItem from "./MenuItem";
