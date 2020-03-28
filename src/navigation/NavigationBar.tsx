@@ -11,8 +11,13 @@ import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import MenuItem from "./MenuItem";
 
-export default function NavigationBar(
-  params: { mappings: IRouteMapping[], oppositeThemeType: any, toggleDarkMode: any }) {
+interface Props {
+  mappings: IRouteMapping[];
+  oppositeThemeType: () => "light" | "dark";
+  toggleDarkMode: () => void;
+}
+
+export default function NavigationBar(params: Props) {
 
   return (
     <div className="root">
