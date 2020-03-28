@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ComponentRoute from "./ComponentRoute";
 import Component from "./Component";
 import { IRouteMapping } from "../models/IRouteMapping";
-import { createMuiTheme, CssBaseline, MuiThemeProvider, ThemeOptions } from "@material-ui/core";
+import { createMuiTheme, CssBaseline, MuiThemeProvider, Theme, ThemeOptions } from "@material-ui/core";
 import { PaletteOptions } from "@material-ui/core/styles/createPalette";
 
 const defaultRoute: IRouteMapping =
@@ -26,7 +26,7 @@ const routes: IRouteMapping[] =
 
 
 
-const defaultTheme: ThemeOptions = {
+const defaultThemeOptions: ThemeOptions = {
   palette: {
     type: "dark",
     primary: {
@@ -36,7 +36,7 @@ const defaultTheme: ThemeOptions = {
 };
 
 interface State {
-  theme: ThemeOptions;
+  themeOptions: ThemeOptions;
 }
 
 export default class App extends React.Component<any, State> {
@@ -44,39 +44,23 @@ export default class App extends React.Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      theme: defaultTheme
+      themeOptions: defaultThemeOptions
     };
-  }
-
-  oppositeThemeType(): "light" | "dark" {
-    return this.state.theme.palette?.type === "light" ? "dark" : "light";
-  }
-
-  getToggledTheme(): ThemeOptions {
-    const theme: ThemeOptions = Object.create(defaultTheme);
-
-    (theme.palette as PaletteOptions).type = this.oppositeThemeType();
-
-    return theme;
-  }
-
-  toggleTheme() {
-    this.setState({
-      theme: this.getToggledTheme()
-    });
   }
 
   render() {
 
 
-    const muiTheme = createMuiTheme(this.state.theme);
+    const theme: Theme = createMuiTheme(this.state.themeOptions);
 
     return (
-      <MuiThemeProvider theme={muiTheme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline/>
         <BrowserRouter>
 
-          <NavigationBar mappings={routes} oppositeThemeType={this.oppositeThemeType.bind(this)} toggleDarkMode={this.toggleTheme.bind(this)} />
+          <NavigationBar mappings={routes}
+                         oppositeThemeType={this.oppositeThemeType.bind(this)}
+                         toggleDarkMode={this.toggleThemeOptions.bind(this)} />
 
           <Switch>
 
@@ -90,6 +74,24 @@ export default class App extends React.Component<any, State> {
         </BrowserRouter>
       </MuiThemeProvider>
     );
+  }
+
+  oppositeThemeType(): "light" | "dark" {
+    return this.state.themeOptions.palette?.type === "light" ? "dark" : "light";
+  }
+
+  getToggledThemeOptions(): ThemeOptions {
+    const themeOptions: ThemeOptions = Object.create(defaultThemeOptions);
+
+    (themeOptions.palette as PaletteOptions).type = this.oppositeThemeType();
+
+    return themeOptions;
+  }
+
+  toggleThemeOptions() {
+    this.setState({
+      themeOptions: this.getToggledThemeOptions()
+    });
   }
 
 }
