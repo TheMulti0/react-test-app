@@ -16,9 +16,10 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap'
   },
   image: {
-    height: '36px',
+    // height: '36px',
+    height: '64px',
     width: 100,
-    marginRight: '1rem !important',
+    // marginRight: '1rem !important',
     '&:hover, &$focusVisible': {
       zIndex: 1,
       '& $imageButton': {
@@ -33,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   imageButton: {
-    borderRadius: '4px',
+    // borderRadius: '4px',
     textDecoration: 'none',
     position: 'absolute',
     left: 0,
@@ -47,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create('background-color', {duration:250})
   },
   imageButtonSelected: {
-    borderRadius: '4px',
+    // borderRadius: '4px',
     textDecoration: 'none',
     position: 'absolute',
     left: 0,
