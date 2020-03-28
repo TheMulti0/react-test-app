@@ -24,11 +24,20 @@ export default function NavigationBar(props: Props) {
   let subjects: Map<IRouteMapping, Subject<any>> = new Map(
     mappings.map(value => [value, new Subject<any>()] as [IRouteMapping, Subject<any>]));
 
-  function onClick(mapping: IRouteMapping) {
-    let original = subjects.get(mapping) as Subject<any>;
-    subjects.delete(mapping);
+  function onClick(mapping?: IRouteMapping) {
+    let original: Subject<any> | undefined = undefined;
+
+    if (mapping !== undefined) {
+      original = subjects.get(mapping) as Subject<any>;
+
+      subjects.delete(mapping);
+    }
+
     subjects.forEach(value => value.next(null));
-    subjects.set(mapping, original)
+
+    if (mapping !== undefined && original !== undefined) {
+      subjects.set(mapping, original)
+    }
   }
 
   return (
@@ -36,7 +45,7 @@ export default function NavigationBar(props: Props) {
       <AppBar position="static" color="transparent">
         <Toolbar variant="regular">
 
-          <Link to='/' onClick={event => onClick(mappings[0])}>
+          <Link to='/' onClick={event => onClick()}>
             <Home color="primary" />
           </Link>
 
